@@ -38,13 +38,42 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
         todoListTableView.delegate = self
         todoListTableView.dataSource = self
         
+        loadAllData()
+        print(list.description)
+        
+        doneButton.style = .plain
         doneButton.target = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        let userDefaults = UserDefaults.standard
-//        userDefaults.set(list, forKey: "todoList")
+        saveAllData()
         todoListTableView.reloadData()
+    }
+    
+    // userdefault 저장
+    func saveAllData() {
+        let data = list.map {
+            [
+                "title": $0.title,  // $0 : 0번부터
+                "content": $0.content!,
+                "isComplete": $0.isComplete
+            ]
+        }
+        
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(data, forKey: "items")
+        userDefaults.synchronize()
+    }
+    
+    func loadAllData() {
+        let userDefaults = UserDefaults.standard
+        guard let data = userDefaults.object(forKey: "items") as? [[String: AnyObject]] else {
+            return
+        }
+        
+        print(data.description)
+        
+        // list 배열에 저장하기
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,17 +104,17 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
         todoListTableView.reloadData()
     }
     
-    // 리스트 선택시 완료된 할일
+    // 리스트 선택시 완료된 일로 표시
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 이미 체크되있는 경우 return
-        if list[indexPath.row].isComplete == true{
+        guard !list[indexPath.row].isComplete else {
             return
         }
         
         // 리스트 선택 시 완료된 할일 표시(checkmark)
         list[indexPath.row].isComplete = true
         
-        let dialog = UIAlertController(title: "Todo List", message: "할일 완료!", preferredStyle: .alert)
+        let dialog = UIAlertController(title: "Todo List", message: "일을 완료했습니다!!!!!", preferredStyle: .alert)
         let action = UIAlertAction(title: "확인", style: UIAlertActionStyle.default)
         dialog.addAction(action)
         self.present(dialog, animated: true, completion: nil)
