@@ -77,7 +77,19 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     // 리스트 선택시 완료된 할일
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 이미 체크되있는 경우 return
+        if list[indexPath.row].isComplete == true{
+            return
+        }
+        
+        // 리스트 선택 시 완료된 할일 표시(checkmark)
         list[indexPath.row].isComplete = true
+        
+        let dialog = UIAlertController(title: "Todo List", message: "할일 완료!", preferredStyle: .alert)
+        let action = UIAlertAction(title: "확인", style: UIAlertActionStyle.default)
+        dialog.addAction(action)
+        self.present(dialog, animated: true, completion: nil)
+        
         todoListTableView.reloadData()
     }
 }
