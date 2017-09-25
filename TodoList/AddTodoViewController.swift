@@ -14,11 +14,9 @@ class AddTodoViewController: UIViewController {
     @IBOutlet weak var contentTextView: UITextView!
     
     @IBAction func addListItemAction(_ sender: Any) {
-        var todoItem: TodoList = TodoList()
-        todoItem.inputTitle = titleTextField.text!
-        todoItem.inputContent = contentTextView.text
+        let todoItem: TodoList = TodoList(title: titleTextField.text!, content: contentTextView.text, isComplete: false)
         
-        print("Add List \(todoItem.title)")
+        print("Add List title : \(todoItem.title)")
         self.navigationController?.popViewController(animated: true)
     }
     

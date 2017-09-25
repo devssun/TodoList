@@ -10,23 +10,12 @@ import Foundation
 
 struct TodoList {
     var title: String = ""
-    var content: String = ""
+    var content: String?
+    var isComplete: Bool = false
     
-    var inputTitle: String{
-        get{
-            return title
-        }
-        set{
-            title = newValue
-        }
-    }
-    
-    var inputContent: String{
-        get{
-            return content
-        }
-        set{
-            content = newValue
-        }
+    init(title: String, content: String?, isComplete: Bool = false) {
+        self.title = title
+        self.content = content
+        self.isComplete = isComplete
     }
 }
