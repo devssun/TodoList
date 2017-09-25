@@ -65,6 +65,7 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
         userDefaults.synchronize()
     }
     
+    // userDefault 데이터 불러오기
     func loadAllData() {
         let userDefaults = UserDefaults.standard
         guard let data = userDefaults.object(forKey: "items") as? [[String: AnyObject]] else {
@@ -74,6 +75,14 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
         print(data.description)
         
         // list 배열에 저장하기
+        print(type(of: data))
+        list = data.map {
+            var title = $0["title"] as? String
+            var content = $0["content"] as? String
+            var isComplete = $0["isComplete"] as? Bool
+            
+            return TodoList(title: title!, content: content!, isComplete: isComplete!)
+        }
     }
 
     override func didReceiveMemoryWarning() {
