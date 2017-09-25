@@ -61,7 +61,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="clT-WF-hz9"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="GjZ-km-G1T">
                             <connections>
-                                <segue destination="jD3-h7-cEa" kind="show" id="TiJ-9l-lrY"/>
+                                <segue destination="jD3-h7-cEa" kind="show" identifier="show" id="TiJ-9l-lrY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -87,17 +87,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Do-IZ-Qps">
-                                <rect key="frame" x="20" y="152" width="374" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Do-IZ-Qps">
+                                <rect key="frame" x="20" y="154" width="374" height="96"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="Ehk-MD-KKR"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6Do-IZ-Qps" firstAttribute="top" secondItem="w3S-P0-zVb" secondAttribute="bottom" constant="25" id="3Ov-5U-3YM"/>
+                            <constraint firstItem="6Do-IZ-Qps" firstAttribute="leading" secondItem="CXP-fH-Bwz" secondAttribute="leading" constant="20" id="Iz1-cA-tsr"/>
                             <constraint firstItem="CXP-fH-Bwz" firstAttribute="trailing" secondItem="w3S-P0-zVb" secondAttribute="trailing" constant="20" id="ZdW-Sb-A1f"/>
+                            <constraint firstItem="CXP-fH-Bwz" firstAttribute="trailing" secondItem="6Do-IZ-Qps" secondAttribute="trailing" constant="20" id="gFa-NM-Gaz"/>
                             <constraint firstItem="w3S-P0-zVb" firstAttribute="top" secondItem="CXP-fH-Bwz" secondAttribute="top" constant="35" id="huc-zS-e4Y"/>
                             <constraint firstItem="w3S-P0-zVb" firstAttribute="leading" secondItem="CXP-fH-Bwz" secondAttribute="leading" constant="20" id="pY1-VX-9NA"/>
                         </constraints>

@@ -13,10 +13,23 @@ class AddTodoViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
     
+    var didAddHandler: ((TodoList) -> Void)?
+    
     @IBAction func addListItemAction(_ sender: Any) {
-        let todoItem: TodoList = TodoList(title: titleTextField.text!, content: contentTextView.text, isComplete: false)
         
-        print("Add List title : \(todoItem.title)")
+        let title = titleTextField.text!
+        let content = contentTextView.text ?? ""
+        
+        let item: TodoList = TodoList(title: title, content: content)
+        
+        print("Add List title : \(item.title)")
+        list.append(item)
+        
+        // Done 버튼 클릭 시 새로운 TodoList 객체 생성
+        // 생성한 객체에 입력한 정보 저장
+        // UserDefaults에 key: value 저장
+//        self.didAddHandler?(item)
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -29,9 +42,10 @@ class AddTodoViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         contentTextView.layer.borderColor = UIColor.gray.cgColor
-        contentTextView.layer.borderWidth = 0.1
+        contentTextView.layer.borderWidth = 0.3
         contentTextView.layer.cornerRadius = 1.0
         contentTextView.clipsToBounds = true
+        
     }
 
     override func didReceiveMemoryWarning() {
