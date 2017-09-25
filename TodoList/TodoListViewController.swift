@@ -74,5 +74,11 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
         list.remove(at: indexPath.row)
         todoListTableView.reloadData()
     }
+    
+    // 리스트 선택시 완료된 할일
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        list[indexPath.row].isComplete = true
+        todoListTableView.reloadData()
+    }
 }
 
