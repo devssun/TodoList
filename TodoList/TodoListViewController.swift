@@ -60,6 +60,7 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
             ]
         }
         
+        print(type(of: data))
         let userDefaults = UserDefaults.standard
         userDefaults.set(data, forKey: "items")
         userDefaults.synchronize()
