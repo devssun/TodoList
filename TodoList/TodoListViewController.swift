@@ -12,18 +12,27 @@ var list = [TodoList]()
 
 class TodoListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    /// 할일리스트
     @IBOutlet weak var todoListTableView: UITableView!
-    @IBOutlet weak var editButton: UIBarButtonItem!
-    let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneButtonTap))
+    /// 편집 버튼
+    lazy var editButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editButtonAction))
+        return button
+    }()
+    /// 완료 버튼
+    lazy var doneButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonAction))
+        return button
+    }()
     
-    // done 버튼 tap시 수정모드 종료
-    @objc
-    func doneButtonTap() {
+    /// done 버튼 클릭 이벤트 - tap시 수정모드 종료
+    @objc func doneButtonAction() {
         self.navigationItem.leftBarButtonItem = editButton
         todoListTableView.setEditing(false, animated: true)
     }
     
-    @IBAction func editButtonAction(_ sender: Any) {
+    /// 편집 버튼 클릭 이벤트
+    @objc func editButtonAction() {
         // 리스트 비어있을 때 return
         guard !list.isEmpty else {
             return
@@ -35,6 +44,7 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.leftBarButtonItem = editButton
         todoListTableView.delegate = self
         todoListTableView.dataSource = self
         
@@ -46,6 +56,7 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         saveAllData()
         todoListTableView.reloadData()
     }
@@ -78,9 +89,9 @@ class TodoListViewController: UIViewController, UITableViewDataSource, UITableVi
         // list 배열에 저장하기
         print(type(of: data))
         list = data.map {
-            var title = $0["title"] as? String
-            var content = $0["content"] as? String
-            var isComplete = $0["isComplete"] as? Bool
+            let title = $0["title"] as? String
+            let content = $0["content"] as? String
+            let isComplete = $0["isComplete"] as? Bool
             
             return TodoList(title: title!, content: content!, isComplete: isComplete!)
         }
